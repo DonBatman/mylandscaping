@@ -1,4 +1,4 @@
-minetest.register_node('mylandscaping:mixer', {
+core.register_node('mylandscaping:mixer', {
 	description = 'Concrete Mixer',
 	drawtype = 'mesh',
 	mesh = 'mylandscaping_crusher.obj',
@@ -23,7 +23,7 @@ minetest.register_node('mylandscaping:mixer', {
 	},
 
 can_dig = function(pos,player)
-	local meta = minetest.get_meta(pos);
+	local meta = core.get_meta(pos);
 	local inv = meta:get_inventory()
 	if player:get_player_name() == meta:get_string('owner') and
 	   inv:is_empty('cobble') and
@@ -37,15 +37,15 @@ can_dig = function(pos,player)
 end,
 
 after_place_node = function(pos, placer, itemstack)
-	local meta = minetest.get_meta(pos)
-	local timer = minetest.get_node_timer(pos)
+	local meta = core.get_meta(pos)
+	local timer = core.get_node_timer(pos)
 	meta:set_string('owner',placer:get_player_name())
 	meta:set_string('infotext','Cement Mixer (owned by '..placer:get_player_name()..')')
 	timer:start(10)
 	end,
 
 on_construct = function(pos)
-	local meta = minetest.get_meta(pos)
+	local meta = core.get_meta(pos)
 	meta:set_string('formspec', 'size[9,10;]'..
 	'background[-0.15,-0.25;9.40,10.75;mylandscaping_background.png]'..
 	--Gravel
@@ -74,7 +74,7 @@ end,
    allow_metadata_inventory_put = function(pos, listname, index, stack, player)
       local input = stack:get_name()
       if listname == 'cobble' then
-         if input == 'default:cobble' or minetest.get_item_group(input, 'ml') > 0 then
+         if input == 'default:cobble' or core.get_item_group(input, 'ml') > 0 then
             return 99
          else
             return 0
@@ -86,7 +86,7 @@ end,
             return 99
          end
       elseif listname == 'sand' then
-         if minetest.get_item_group(input, 'sand') > 0 then
+         if core.get_item_group(input, 'sand') > 0 then
             return 99
          else
             return 0
@@ -97,8 +97,8 @@ end,
    end,
 
 on_timer = function(pos)
-	local timer 	=	minetest.get_node_timer(pos)
-	local meta 	= 	minetest.get_meta(pos)
+	local timer 	=	core.get_node_timer(pos)
+	local meta 	= 	core.get_meta(pos)
 	local inv 	= 	meta:get_inventory()
 	local cobble 	= 	inv:get_stack('cobble', 1)
 	local gravel 	= 	inv:get_stack('gravel', 1)
@@ -106,12 +106,12 @@ on_timer = function(pos)
 	local cobble_inv=	cobble:get_name()
    local sand_inv = sand:get_name()
 ----------------------------------------------------------------------
-	if cobble:get_name() == 'default:cobble' or minetest.get_item_group(cobble_inv, 'ml') > 0 then
+	if cobble:get_name() == 'default:cobble' or core.get_item_group(cobble_inv, 'ml') > 0 then
 		inv:add_item('gravel','default:gravel')
 		cobble:take_item()
 		inv:set_stack('cobble',1,cobble)
 	end
-	if gravel:get_name() == 'default:gravel' and minetest.get_item_group(sand_inv, 'sand') > 0 then
+	if gravel:get_name() == 'default:gravel' and core.get_item_group(sand_inv, 'sand') > 0 then
 		inv:add_item('concrete','mylandscaping:concrete_bag')
 		gravel:take_item()
 		inv:set_stack('gravel',1,gravel)

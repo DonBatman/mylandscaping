@@ -64,7 +64,7 @@ for i in ipairs (block_type1) do
       local coldesc = color_tab[i][2]
       local alpha = color_tab[i][3]
 
-      minetest.register_node('mylandscaping:mwall_'..typ..'_'..col, {
+      core.register_node('mylandscaping:mwall_'..typ..'_'..col, {
       	description = desc2..' '..coldesc,
       	drawtype = 'mesh',
       	mesh = 'mylandscaping_'..obj..'.obj',
@@ -78,21 +78,21 @@ for i in ipairs (block_type1) do
       	sounds = default.node_sound_stone_defaults(),
 
       after_place_node = function(pos, placer, itemstack, pointed_thing)
-      	local nodeu = minetest.get_node({x=pos.x,y=pos.y-1,z=pos.z})
-      	local nodea = minetest.get_node({x=pos.x,y=pos.y+1,z=pos.z})
+      	local nodeu = core.get_node({x=pos.x,y=pos.y-1,z=pos.z})
+      	local nodea = core.get_node({x=pos.x,y=pos.y+1,z=pos.z})
       	if nodeu.name == 'mylandscaping:mwall_'..typ..'_'..col then
-      	   minetest.swap_node(pos,{name='mylandscaping:mwall_'..typ..'_'..col,param2=nodeu.param2})
-      	   minetest.swap_node({x=pos.x,y=pos.y-1,z=pos.z},{name='mylandscaping:mwall_b'..typ..'_'..col,param2=nodeu.param2})
+      	   core.swap_node(pos,{name='mylandscaping:mwall_'..typ..'_'..col,param2=nodeu.param2})
+      	   core.swap_node({x=pos.x,y=pos.y-1,z=pos.z},{name='mylandscaping:mwall_b'..typ..'_'..col,param2=nodeu.param2})
       	end
       	if nodea.name == 'mylandscaping:mwall_'..typ..'_'..col then
-      	   minetest.swap_node(pos,{name='mylandscaping:mwall_b'..typ..'_'..col,param2=nodea.param2})
+      	   core.swap_node(pos,{name='mylandscaping:mwall_b'..typ..'_'..col,param2=nodea.param2})
       	end
       end,
 
       after_destruct = function(pos, oldnode)
-      	local nodeu = minetest.get_node({x=pos.x,y=pos.y-1,z=pos.z})
+      	local nodeu = core.get_node({x=pos.x,y=pos.y-1,z=pos.z})
       	if nodeu.name == 'mylandscaping:mwall_b'..typ..'_'..col then
-      	   minetest.swap_node({x=pos.x,y=pos.y-1,z=pos.z},{name='mylandscaping:mwall_'..typ..'_'..col,param2=nodeu.param2})
+      	   core.swap_node({x=pos.x,y=pos.y-1,z=pos.z},{name='mylandscaping:mwall_'..typ..'_'..col,param2=nodeu.param2})
       	end
       end,
       })

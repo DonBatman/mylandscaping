@@ -26,7 +26,7 @@ local color_tab = {
 {'cement',    '',      ''},
 }
 
-minetest.register_node('mylandscaping:machine', {
+core.register_node('mylandscaping:machine', {
    description = 'Concrete Forms',
    drawtype = 'mesh',
    mesh = 'mylandscaping_cement_mixer.obj',
@@ -52,7 +52,7 @@ minetest.register_node('mylandscaping:machine', {
    },
 
    can_dig = function(pos,player)
-      local meta = minetest.get_meta(pos);
+      local meta = core.get_meta(pos);
       local inv = meta:get_inventory()
       if player:get_player_name() == meta:get_string('owner') and
          inv:is_empty('input') and
@@ -73,7 +73,7 @@ minetest.register_node('mylandscaping:machine', {
             return 0
          end
       elseif listname == 'dye' then
-         if minetest.get_item_group(input, 'dye') > 0 then
+         if core.get_item_group(input, 'dye') > 0 then
             return 99
          else
             return 0
@@ -84,13 +84,13 @@ minetest.register_node('mylandscaping:machine', {
    end,
 
    after_place_node = function(pos, placer, itemstack)
-      local meta = minetest.get_meta(pos)
+      local meta = core.get_meta(pos)
       meta:set_string('owner',placer:get_player_name())
       meta:set_string('infotext','Concrete Mixer (owned by '..placer:get_player_name()..')')
       end,
 
    on_construct = function(pos)
-      local meta = minetest.get_meta(pos)
+      local meta = core.get_meta(pos)
       meta:set_string('formspec', retaining_walls)
       meta:set_string('infotext', 'Concrete Mixer')
       local inv = meta:get_inventory()
@@ -100,7 +100,7 @@ minetest.register_node('mylandscaping:machine', {
    end,
 
    on_receive_fields = function(pos, formname, fields, sender)
-      local meta = minetest.get_meta(pos)
+      local meta = core.get_meta(pos)
       local inv = meta:get_inventory()
       if fields['retain'] then
          meta:set_string('formspec', retaining_walls)

@@ -33,7 +33,7 @@ for i in ipairs (block_type1) do
    local coldesc = color_tab[i][2]
    local alpha = color_tab[i][3]
 
-   minetest.register_node('mylandscaping:column_t_'..obj..'_'..col, {
+   core.register_node('mylandscaping:column_t_'..obj..'_'..col, {
    	description = desc2..' topper',
    	drawtype = 'mesh',
    	mesh = 'mylandscaping_column_t_'..obj..'.obj',

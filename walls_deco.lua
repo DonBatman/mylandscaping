@@ -42,7 +42,7 @@ for i in ipairs (block_type1) do
       local coldesc = color_tab[i][2]
       local alpha = color_tab[i][3]
 
-      minetest.register_node('mylandscaping:deco_'..obj..'_'..col, {
+      core.register_node('mylandscaping:deco_'..obj..'_'..col, {
       	description = desc2.." "..coldesc,
       	drawtype = 'mesh',
       	mesh = 'mylandscaping_deco_'..obj..'.obj',
@@ -55,7 +55,7 @@ for i in ipairs (block_type1) do
       	sounds = default.node_sound_stone_defaults(),
       })
 
-      minetest.register_node('mylandscaping:deco_column_light_'..col, {
+      core.register_node('mylandscaping:deco_column_light_'..col, {
       	description = coldesc..'lighted column',
       	drawtype = 'mesh',
       	mesh = 'mylandscaping_deco_column_l.obj',
@@ -73,7 +73,7 @@ for i in ipairs (block_type1) do
       	sounds = default.node_sound_stone_defaults(),
       })
 
-      minetest.register_craft({
+      core.register_craft({
       		type = 'shapeless',
       		output = 'mylandscaping:deco_column_light_'..col,
       		recipe = {'default:torch', 'mylandscaping:deco_column_'..col}

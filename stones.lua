@@ -248,9 +248,9 @@ for i in ipairs (stone_types) do
    local coldesc = color_tab[i][2]
    local alpha = color_tab[i][3]
 
-   minetest.register_alias('mylandscaping:stone_'..style,'mylandscaping:stone_'..style..'cement')
+   core.register_alias('mylandscaping:stone_'..style,'mylandscaping:stone_'..style..'cement')
 
-   minetest.register_node('mylandscaping:stone_'..style..col,{
+   core.register_node('mylandscaping:stone_'..style..col,{
    	description = desc..' Patio Stone '..coldesc,
    	drawtype = 'nodebox',
    	tiles = {
@@ -269,15 +269,15 @@ for i in ipairs (stone_types) do
    	sounds = default.node_sound_stone_defaults(),
 
    	after_place_node = function(pos, placer, itemstack, pointed_thing)
-   		local nodeu = minetest.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
-         if minetest.get_item_group(nodeu, 'sand') > 0 then
-   		   minetest.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = 'mylandscaping:stone_'..style..'_sand'..col})
-   		   minetest.set_node(pos,{name = 'air'})
+   		local nodeu = core.get_node({x=pos.x, y=pos.y-1, z=pos.z}).name
+         if core.get_item_group(nodeu, 'sand') > 0 then
+   		   core.set_node({x=pos.x, y=pos.y-1, z=pos.z},{name = 'mylandscaping:stone_'..style..'_sand'..col})
+   		   core.set_node(pos,{name = 'air'})
    		end
    	end,
 
    })
-   minetest.register_node('mylandscaping:stone_'..style..'_sand'..col,{
+   core.register_node('mylandscaping:stone_'..style..'_sand'..col,{
    	description = desc..' Patio Stone in Sand '..coldesc,
    	drawtype = 'nodebox',
    	tiles = {
@@ -296,7 +296,7 @@ for i in ipairs (stone_types) do
    	collision_box = sstone_cbox,
    	sounds = default.node_sound_stone_defaults(),
    	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-   		minetest.set_node(pos,{name = 'default:silver_sand'})
+   		core.set_node(pos,{name = 'default:silver_sand'})
    	end,
    })
    end

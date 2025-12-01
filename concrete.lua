@@ -1,4 +1,4 @@
-minetest.register_node('mylandscaping:concrete', {
+core.register_node('mylandscaping:concrete', {
 	description = 'Concrete',
 	tiles = {'mylandscaping_cement.png'},
 	groups = {cracky=1, ml=1},

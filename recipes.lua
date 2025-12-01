@@ -1,4 +1,4 @@
-minetest.register_craft({
+core.register_craft({
 	output = 'mylandscaping:machine',
 	recipe = {
 		{'default:shovel_steel', 'bucket:bucket_water', ''},
@@ -7,7 +7,7 @@ minetest.register_craft({
 		}
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = 'mylandscaping:mixer',
 	recipe = {
 		{'default:pick_steel', 'default:paper', 'default:chest'},
@@ -16,7 +16,7 @@ minetest.register_craft({
 		}
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = 'mylandscaping:concrete',
 	recipe = {
 		{'', '', ''},
@@ -25,7 +25,7 @@ minetest.register_craft({
 		}
 })
 
-minetest.register_craftitem('mylandscaping:concrete_bag', {
+core.register_craftitem('mylandscaping:concrete_bag', {
 	description = 'Bag of Concrete Mix',
 	inventory_image = 'mylandscaping_cement_bag.png',
 })
